@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiKeyRequest} from "@dapi/sdk-core";
-import {CartApi, OrderApi} from "@dapi/sdk";
+import {OrderApi, OrderReply} from "@dapi/sdk";
 import {ActivatedRoute} from "@angular/router";
-import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-order',
@@ -12,7 +11,7 @@ import {Observable} from "rxjs";
 export class OrderComponent implements OnInit {
 
   orderApi: OrderApi;
-  orders: Observable<any>;
+  order$: Promise<OrderReply>;
 
   constructor(private route: ActivatedRoute) {
     const proxyAddress = 'https://proxy.digitalforairlines.com/v2';
@@ -23,8 +22,7 @@ export class OrderComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(param => {
-      this.orders = this.orderApi.retrieveOrder({orderId: param.get('orderId')});
+      this.order$ = this.orderApi.retrieveOrder({orderId: param.get('orderId')});
     });
   }
-
 }

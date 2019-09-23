@@ -6,7 +6,7 @@ import {TravelersComponent} from "./travelers.component";
 
 
 @NgModule({
-  declarations: [],
+  declarations: [TravelersComponent],
   imports: [
     RouterModule.forChild([
       { path: ':cartId', component: TravelersComponent }

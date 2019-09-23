@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+<a routerLink="/">메인으로</a>
+<ul>
+  <li>출발 공항: <input #departureAirport type="text" [value]="bookingSearchCriteria.departureAirportCode" (input)="bookingSearchCriteria.departureAirportCode = $event.target.value.toUpperCase()"></li>
+  <app-airport-search *ngIf="!!bookingSearchCriteria.departureAirportCode" [startWith]="bookingSearchCriteria.departureAirportCode"></app-airport-search>
+  <li>도착 공항: <input #destinationAirport type="text" [value]="bookingSearchCriteria.destinationAirportCode" (input)="bookingSearchCriteria.destinationAirportCode = $event.target.value.toUpperCase()"></li>
+  <app-airport-search *ngIf="!!bookingSearchCriteria.destinationAirportCode" [startWith]="bookingSearchCriteria.destinationAirportCode"></app-airport-search>
+  <li>출발일: <input #departureDate type="date" [value]="bookingSearchCriteria.departureDate" (input)="bookingSearchCriteria.departureDate = $event.target.value"></li>
+  <li>도착일: <input #returnDate type="date" [value]="bookingSearchCriteria.returnDate" (input)="bookingSearchCriteria.returnDate = $event.target.value"></li>
+  <li>성인: <input #aduldtsCount type="number" [value]="bookingSearchCriteria.adultsCount" (input)="bookingSearchCriteria.adultsCount = $event.target.value" max="9" min="0"></li>
+  <li>소아: <input #childrenCount type="number" [value]="bookingSearchCriteria.childrenCount" (input)="bookingSearchCriteria.childrenCount = $event.target.value" max="9" min="0"></li>
+  <li>유아: <input #infantsCount type="number" [value]="bookingSearchCriteria.infantsCount" (input)="bookingSearchCriteria.infantsCount = $event.target.value" max="9" min="0"></li>
+  <li><button (click)="goNextPage()">Search</button></li>
+</ul>

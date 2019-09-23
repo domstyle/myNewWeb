@@ -1,1 +1,23 @@
-<p>travelers works!</p>
+<ul>
+  <li *ngFor="let traveler of cart.travelers;index as i">
+    <h4>승객 #{{i+1}}</h4>
+    <span>
+      <input type="text" value="{{traveler.names[0].firstName}}" (input)="traveler.names[0].firstName = $event.target.value"/>
+      <input type="text" value="{{traveler.names[0].lastName}}" (input)="traveler.names[0].lastName = $event.target.value"/>
+      <select value={{traveler.gender}} (input)="traveler.gender = $event.target.value">
+        <option value="">-</option>
+        <option value="male">MR</option>
+        <option value="female">MS/MRS</option>
+        <option value="unspecified">NOPE</option>
+      </select>
+    </span>
+    <span *ngIf="traveler.passengerTypeCode === 'CHD' || traveler.passengerTypeCode == 'INF'">
+      <input type="date" value="{{!!traveler.dateOfBirth ? traveler.dateOfBirth.getFullYear()+(traveler.dateOfBirth.getMonth() + 1 + '').padStart(2, '0')+(traveler.dateOfBirth.getDate() + '').padStart(2, '0'):''}}"/>
+    </span>
+  </li>
+  <li>
+    <h4>연락처</h4>
+    <input type="text" value="{{contactInfo}}" (input)="contactInfo = $event.target.value"/>
+  </li>
+  <li><button (click)="gotoPay()">다음으로</button></li>
+</ul>
