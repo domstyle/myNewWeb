@@ -1,0 +1,24 @@
+<ul>
+  <li>출발 공항 : {{bookingSearchCriteria.departureAirportCode}}</li>
+  <li>도착 공항 : {{bookingSearchCriteria.destinationAirportCode}}</li>
+  <li>출발일 : {{bookingSearchCriteria.departureDate}}</li>
+  <li *ngIf="!!bookingSearchCriteria.returnDate">도착일 : {{bookingSearchCriteria.returnDate}}</li>
+  <li>성소유 : {{bookingSearchCriteria.adultsCount}}/{{bookingSearchCriteria.childrenCount}}/{{bookingSearchCriteria.infantsCount}}</li>
+</ul>
+
+<h4>가는 여정</h4>
+<table>
+  <tr *ngFor="let bound of outgoingOffers">
+    <td><input type="radio" name="outgoing" value="{{bound.id}}"/></td>
+    <td>
+      <ul>
+        <li *ngFor="let flight of bound.flights">{{flight.flight.departure.locationCode}}({{flight.flight.departure.dateTime.toDateString()}})
+          -&gt;
+          {{flight.flight.arrival.locationCode}}({{flight.flight.arrival.dateTime.toDateString()}}) {{flight.cabin}}</li>
+      </ul>
+    </td>
+    <td>잔여좌석 : {{bound.quota}}</td>
+    <td>비행시간 : {{bound.duration/60/60}}</td>
+    <td>{{bound.prices.totalPrices[0].currencyCode}} {{bound.prices.totalPrices[0].total}}</td>
+  </tr>
+</table>
